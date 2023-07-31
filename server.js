@@ -23,8 +23,8 @@ app.use(express.static("public"));
 // above we are using extended: true to allow for nested objects in the urlencoded data
 // and we are using express.json() to parse incoming requests with JSON payloads
 
-// get *
-// get /notes
+// get * for homepage.html
+// get /notes for notes.html
 
 app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "./public/assets/notes.html"));
