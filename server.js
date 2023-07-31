@@ -1,12 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-// get /notes
-// get api/notes route
-// Post api/notes route
-// wildcard 
-// delete route
-
+const routes = require("./routes/index.js");
 // import node modules
 // set up express app
 // middleware for data processing
@@ -21,10 +16,25 @@ const PORT = 3000;
 // middleware for data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/api', routes);
+// we are using the routes imported from the index.js file in the routes folder
 app.use(express.static("public"));
 // above we are using express.static to serve the static files in the public folder
 // above we are using extended: true to allow for nested objects in the urlencoded data
 // and we are using express.json() to parse incoming requests with JSON payloads
+
+// get *
+// get /notes
+
+app.get("/notes", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/assets/notes.html"));
+});
+// above we are using the get method to send the notes.html file to the client
+
+app.get("*", (req, res) => {
+  res.sendFile("./public/assets/homepage.html");
+});
+// above we use wildcard "*" to send the homepage.html file to the client
 
 app.listen(PORT, function () {
   console.log("App listening on http://localhost:" + PORT);
