@@ -27,12 +27,12 @@ app.use(express.static("public"));
 // get /notes for notes.html
 
 app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "./public/assets/notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 // above we are using the get method to send the notes.html file to the client
 
 app.get("*", (req, res) => {
-  res.sendFile("./public/assets/homepage.html");
+  res.sendFile("./public/homepage.html");
 });
 // above we use wildcard "*" to send the homepage.html file to the client
 
