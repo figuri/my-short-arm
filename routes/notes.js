@@ -4,6 +4,7 @@ const fs = require("fs");
 // above we are requiring the fs module so we can read and write to the db.json file
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
+// above we are requiring the uuid module so we can create unique ids for each note
 // we need to make a get request to read the db.json file and return all saved notes as JSON
 router.get("/", (req, res) => {
   // Read the file
@@ -48,21 +49,28 @@ router.post("/", (req, res) => {
 });
 
 // make a route to delete a note based on the id of the note
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
   // Read the file
   fs.readFile("./db/db.json", (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Error reading notes");
+    }
     // parse file into an array
     const notes = JSON.parse(data);
-    // filter out the note with the id that was passed in
-    const filteredNotes = notes.filter((note) => note.id !== req.body.id);
-    // write file
+    // filter out the note with the id that was passed in the url
+    const filteredNotes = notes.filter((note) => note.id !== req.params.id);
+    // write the filtered notes to the file
     fs.writeFile("./db/db.json", JSON.stringify(filteredNotes), (err) => {
       // if there is an error, console log the error and return a 500 status code
       if (err) {
         console.log(err);
         return res.status(500).send("Error writing notes");
       }
+      //   if there is no error, return the new note to the client
+      res.json(filteredNotes);
     });
   });
 });
+
 module.exports = router;
