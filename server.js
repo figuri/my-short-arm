@@ -33,8 +33,9 @@ app.get("/notes", function (req, res) {
 // above we are using the get method to send the notes.html file to the client
 
 app.get("*", (req, res) => {
-  res.sendFile("./public/index.html");
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
+
 // above we use wildcard "*" to send the homepage.html file to the client
 
 app.listen(PORT, function () {

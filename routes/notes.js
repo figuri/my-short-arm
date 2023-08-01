@@ -2,7 +2,8 @@ const router = require("express").Router();
 // above we are requiring the express router so we can use it to create routes
 const fs = require("fs");
 // above we are requiring the fs module so we can read and write to the db.json file
-
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 // we need to make a get request to read the db.json file and return all saved notes as JSON
 router.get("/", (req, res) => {
   // Read the file
@@ -28,11 +29,13 @@ router.post("/", (req, res) => {
     // parse file into an array
     const notes = JSON.parse(data);
     // push new note into array
+    req.body.id = uuidv4();
     notes.push(req.body);
+
     // write file with id number to reference later
     fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
-        // assing id to note
-        req.body.id = notes.length;
+      // assing id to note
+
       // if there is an error, console log the error and return a 500 status code
       if (err) {
         console.log(err);
