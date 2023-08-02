@@ -46,6 +46,7 @@ Websites that helped me:
 * [w3schools](https://www.w3schools.com/)
 * [MDN](https://developer.mozilla.org/en-US/)
 * [StackOverflow](https://stackoverflow.com/)
-
+* Special Thanks to Henry Weigand (TA) for helping me understand the concept of routing and how to use it in this application. his Linkedin is below.
+* https://www.linkedin.com/in/henryweigand/
 
 ```
