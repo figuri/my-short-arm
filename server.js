@@ -10,7 +10,7 @@ const routes = require("./routes/index.js");
 // import node modules
 // set up express app
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 // above we are setting up the express app and setting the port to 3000
 
 // middleware for data parsing
