@@ -129,5 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-DS_store
+.DS_store
 node_modules
